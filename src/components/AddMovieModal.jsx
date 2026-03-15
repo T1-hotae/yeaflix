@@ -1,5 +1,7 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { Search, X, Film, ChevronRight, Loader2 } from 'lucide-react';
 import { searchMovies, getPosterUrl, getYear, formatRating } from '../api/tmdb';
 
@@ -8,7 +10,7 @@ export default function AddMovieModal({ onClose }) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => { inputRef.current?.focus(); }, []);
 
@@ -29,7 +31,7 @@ export default function AddMovieModal({ onClose }) {
   }, [query]);
 
   const handleSelect = (movie) => {
-    navigate(`/movie/${movie.id}`);
+    router.push(`/movie/${movie.id}`);
     onClose();
   };
 

@@ -1,5 +1,8 @@
+'use client';
+
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Search, BookOpen, Settings, LogOut } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
@@ -8,12 +11,12 @@ export default function Navbar() {
   const [query, setQuery] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    navigate(`/?search=${encodeURIComponent(query.trim())}`);
+    router.push(`/?search=${encodeURIComponent(query.trim())}`);
     setQuery("");
   };
 
@@ -29,7 +32,7 @@ export default function Navbar() {
 
   const handleMyDiary = () => {
     setDropdownOpen(false);
-    navigate("/");
+    router.push("/");
     setTimeout(() => {
       window.dispatchEvent(
         new CustomEvent("switch-tab", { detail: "my_diary" }),
@@ -39,7 +42,7 @@ export default function Navbar() {
 
   const handleSettings = () => {
     setDropdownOpen(false);
-    navigate("/settings");
+    router.push("/settings");
   };
 
   const handleLogout = async () => {
@@ -52,7 +55,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
         {/* 로고 */}
         <Link
-          to="/"
+          href="/"
           className="text-xl font-bold text-cinema-gold whitespace-nowrap tracking-wide"
         >
           Yeflix

@@ -1,14 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { Film, PenLine } from 'lucide-react';
 import { getPosterUrl } from '../api/tmdb';
 
 export default function DiaryCard({ diary }) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const poster = diary.moviePoster ? getPosterUrl(diary.moviePoster, 'w342') : null;
 
   return (
     <div
-      onClick={() => navigate(`/movie/${diary.movieId}`)}
+      onClick={() => router.push(`/movie/${diary.movieId}`)}
       className="group relative block rounded-xl overflow-hidden bg-cinema-card hover:scale-[1.03] transition-transform duration-200 shadow-lg cursor-pointer"
     >
       <div className="aspect-[2/3] overflow-hidden bg-cinema-surface">

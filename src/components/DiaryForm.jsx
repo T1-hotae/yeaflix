@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Tag, X, Plus } from 'lucide-react';
 import StarRating from './StarRating';
