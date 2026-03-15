@@ -9,6 +9,8 @@ node_modules/
 # 빌드 결과물
 dist/
 dist-ssr/
+.next/
+out/
 
 # 에디터
 .vscode/
@@ -26,3 +28,5 @@ Thumbs.db
 # 로그
 *.log
 npm-debug.log*
+
+.claude/

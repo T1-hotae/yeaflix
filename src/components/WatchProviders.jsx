@@ -10,6 +10,7 @@ const DIRECT_URL = {
   97: (t) => `https://watcha.com/search?query=${encodeURIComponent(t)}`,
   356: (t) => `https://www.wavve.com/search?keyword=${encodeURIComponent(t)}`,
   127: (t) => `https://www.tving.com/search?keyword=${encodeURIComponent(t)}`,
+  1096: (t) => `https://www.tving.com/search?keyword=${encodeURIComponent(t)}`,
   464: (t) =>
     `https://www.coupangplay.com/search?keyword=${encodeURIComponent(t)}`,
   337: (t) => `https://www.disneyplus.com/search?q=${encodeURIComponent(t)}`,
@@ -57,10 +58,12 @@ function ProviderButton({ provider, movieTitle, fallbackLink }) {
           <ExternalLink size={16} className="text-white" />
         </div>
       </div>
-      <span className="text-xs text-cinema-muted group-hover:text-white transition text-center leading-tight">
+      <span className="text-xs text-cinema-muted group-hover:text-white transition text-center leading-tight w-14 truncate block">
         {provider.provider_name
           .replace(" Plus", "+")
-          .replace("Amazon Prime Video", "Prime")}
+          .replace("Amazon Prime Video", "Prime")
+          .replace("Google Play Movies", "구글 무비")
+          .replace("Naver Series On", "네이버 시리즈")}
       </span>
     </a>
   );

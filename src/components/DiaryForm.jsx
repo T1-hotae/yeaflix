@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Tag, X, Plus } from 'lucide-react';
 import StarRating from './StarRating';
 
@@ -9,6 +9,14 @@ const PRESET_TAGS = ['감동적', '재미있음', '무서움', '지루함', '명
 export default function DiaryForm({ initial = null, onSave, onDelete, loading }) {
   const [rating, setRating] = useState(initial?.rating ?? 0);
   const [content, setContent] = useState(initial?.content ?? '');
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }, [content]);
   const [tags, setTags] = useState(initial?.tags ?? []);
   const [watchedDate, setWatchedDate] = useState(
     initial?.watchedDate ?? new Date().toISOString().slice(0, 10)
@@ -59,11 +67,12 @@ export default function DiaryForm({ initial = null, onSave, onDelete, loading })
       <div>
         <label className="block text-sm text-cinema-muted mb-1.5 font-medium">감상평</label>
         <textarea
+          ref={textareaRef}
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="이 영화에 대한 솔직한 감상을 적어보세요..."
-          rows={5}
-          className="w-full bg-cinema-surface text-white text-sm px-4 py-3 rounded-xl border border-white/10 focus:border-cinema-gold/50 outline-none transition resize-none placeholder-cinema-muted"
+          rows={6}
+          className="w-full bg-cinema-surface text-white text-sm px-4 py-4 rounded-xl border border-white/10 focus:border-cinema-gold/50 outline-none transition resize-none placeholder-cinema-muted leading-relaxed overflow-hidden"
         />
         <p className="text-xs text-cinema-muted text-right mt-1">{content.length}자</p>
       </div>
